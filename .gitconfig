@@ -1,5 +1,0 @@
-[user]
-	name = Jessica Kafor
-	email = info@leadstart.org
-[credential]
-	helper = cache --timeout=3600
