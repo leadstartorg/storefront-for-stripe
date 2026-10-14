@@ -1,0 +1,1273 @@
+/*
+ * Storefront for Stripe - base stylesheet for the shop front-end.
+ * The drawer/cart injects its own styles via JS; this file styles the
+ * product archive grid, the single product page and the account pages. Everything
+ * uses the stripe-shop-lite- prefix - override freely in your theme.
+ */
+
+/* ---------- Archive (shop / category / tag pages) ---------- */
+body.archive.tax-product_category #page,
+body.archive.tax-product_keyword #page,
+body.archive.tax-product_tag #page {
+    padding: 3rem !important;
+}
+
+.stripe-shop-lite-archive {
+    max-width: none;
+    margin: 0 auto;
+    padding: 0 !important;
+}
+
+.stripe-shop-lite-product-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow .2s;
+}
+.stripe-shop-lite-product-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+
+.stripe-shop-lite-card-media { display: block; aspect-ratio: 1/1; background: #f5f5f5; }
+.stripe-shop-lite-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.stripe-shop-lite-card-noimg { display: block; width: 100%; height: 100%; min-height: 120px; background: #f5f5f5; object-fit: cover; }
+
+/* Loading spinner: shown in the cart drawer, the cart page and the
+   infinite-scroll sentinel while data is fetched. Pure CSS, no icon font. */
+.stripe-shop-lite-loader { display: flex; align-items: center; gap: 10px; color: #6c757d; font-size: 14px; padding: 16px; }
+.stripe-shop-lite-loader::before { content: ""; width: 18px; height: 18px; border-radius: 50%; border: 3px solid #dee2e6; border-top-color: #635bff; animation: stripe-shop-lite-spin .7s linear infinite; flex: none; }
+@keyframes stripe-shop-lite-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .stripe-shop-lite-loader::before { animation-duration: 2s; } }
+.stripe-shop-lite-infinite-sentinel { min-height: 24px; }
+
+.stripe-shop-lite-card-title {
+    font-size: 17px;
+    margin: 14px 14px 4px;
+}
+.stripe-shop-lite-card-title a { text-decoration: none; color: inherit; }
+
+.stripe-shop-lite-card-price {
+    margin: 0 14px 10px;
+    font-weight: 600;
+    color: #111;
+}
+
+.stripe-shop-lite-recurring { font-weight: 400; color: #666; font-size: .85em; }
+
+.stripe-shop-lite-card-actions { margin: auto 14px 14px; padding-top: 8px; }
+.stripe-shop-lite-unavailable { font-size: 13px; color: #999; font-style: italic; }
+
+/* When Bootstrap 5 is enabled (Store -> Settings) the cards carry BS5 classes
+   (card, card-body, btn); pin our layout so both modes look right. */
+.stripe-shop-lite-product-card.card { display: flex; flex-direction: column; height: 100%; }
+.stripe-shop-lite-product-card .card-body { padding: 0 0 4px; }
+.stripe-shop-lite-product-card .card-body h3 { font-size: 17px; margin: 14px 14px 4px; }
+.stripe-shop-lite-product-card .btn { border-radius: 6px; }
+
+.stripe-shop-lite-no-products { color: #777; }
+
+/* ---------- Single product page ---------- */
+
+.stripe-shop-lite-product-page {
+    max-width: none;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.stripe-shop-lite-product-media img { width: 100%; height: auto; border-radius: 8px; display: block; }
+
+.stripe-shop-lite-product-title { margin: 0 0 8px; }
+
+.stripe-shop-lite-product-price { font-size: 24px; font-weight: 700; margin: 0 0 16px; }
+
+.stripe-shop-lite-product-content { margin-bottom: 24px; }
+
+.stripe-shop-lite-product-actions button { font-size: 16px; padding: 12px 28px; }
+
+.stripe-shop-lite-stock { color: #666; font-size: 14px; }
+
+.stripe-shop-lite-crowdsignal { margin: 32px 0; }
+
+/* ---------- Shared buttons (drawer injects its own; these cover page buttons) ---------- */
+
+button.stripe-shop-lite-add,
+button.stripe-shop-lite-waitlist-join {
+    background: #635bff;             /* Stripe brand purple - change to taste */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+button.stripe-shop-lite-add:hover,
+button.stripe-shop-lite-waitlist-join:hover { filter: brightness(1.1); }
+
+button.stripe-shop-lite-waitlist-open {
+    background: none;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.stripe-shop-lite-waitlist-form { display: flex; gap: 8px; flex-wrap: wrap; }
+.stripe-shop-lite-waitlist-email {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* ---------- Account page ([store_my_account]) ---------- */
+
+.stripe-shop-lite-account { max-width: 800px; margin: 0 auto; padding: 24px; }
+.stripe-shop-lite-account table { width: 100%; border-collapse: collapse; }
+.stripe-shop-lite-account th, .stripe-shop-lite-account td { text-align: left; padding: 8px 12px; border-bottom: 1px solid #eee; }
+
+/* ---------- Shop filters ([store_filters] + archive) ---------- */
+
+.stripe-shop-lite-filters {
+    max-width: 1200px;
+    margin: 0 auto 24px;
+    padding: 16px 24px 0;
+}
+.stripe-shop-lite-filter-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+.stripe-shop-lite-filter { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #555; }
+.stripe-shop-lite-filter input, .stripe-shop-lite-filter select {
+    padding: 8px 10px;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    min-width: 200px;
+}
+.stripe-shop-lite-price-range { display: inline-flex; gap: 6px; align-items: center; }
+.stripe-shop-lite-price-range input { width: 90px; min-width: 0; }
+.stripe-shop-lite-filter-apply {
+    background: #635bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 22px;
+    cursor: pointer;
+}
+
+/* ---------- Profile form ---------- */
+
+.stripe-shop-lite-profile { max-width: 420px; display: flex; flex-direction: column; gap: 14px; }
+.stripe-shop-lite-profile label { font-size: 14px; color: #444; }
+.stripe-shop-lite-profile input {
+    width: 100%;
+    margin-top: 4px;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+.stripe-shop-lite-profile button {
+    background: #635bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-start;
+}
+.stripe-shop-lite-profile-note { font-size: 13px; color: #777; }
+
+.stripe-shop-lite-notice { padding: 12px 16px; border-radius: 6px; margin-bottom: 16px; font-size: 14px; }
+.stripe-shop-lite-notice-ok { background: #e8f7ee; color: #1a7f46; }
+.stripe-shop-lite-notice-err { background: #fdecec; color: #b3261e; }
+
+/* ---------- Cart page ([store_cart], rendered by store.js) ---------- */
+
+.stripe-shop-lite-cart-table { width: 100%; }
+.stripe-shop-lite-cart-table th { padding: 12px 8px; border-bottom: 2px solid #eee; text-align: left; }
+.stripe-shop-lite-cart-table td { padding: 12px 8px; border-bottom: 1px solid #eee; vertical-align: middle; }
+.stripe-shop-lite-cart-thumb { width: 72px; height: 72px; object-fit: cover; border-radius: 6px; display: inline-block; }
+.stripe-shop-lite-cart-noimg { background: #f5f5f5; }
+.stripe-shop-lite-cart-title { text-decoration: none; color: inherit; font-weight: 600; }
+.stripe-shop-lite-cart-per { font-size: 12px; color: #777; margin-top: 2px; }
+.stripe-shop-lite-qty-group { display: flex; flex-wrap: nowrap !important; align-items: stretch; width: 100%; max-width: 220px; }
+.stripe-shop-lite-qty-group .btn { flex: 0 0 36px; border: 1px solid #ccc; background: #fff; color: #333; min-width: 36px; }
+.stripe-shop-lite-qty-group .form-control,
+.stripe-shop-lite-qty-value { flex: 1 1 auto; width: auto; min-width: 0; text-align: center; border: 1px solid #ccc; }
+.stripe-shop-lite-cart-qty { width: 230px; }
+.stripe-shop-lite-cart-remove .btn { background: #dc3545; border-color: #dc3545; color: #fff; }
+.stripe-shop-lite-cart-subtotal-row td { border-bottom: none; padding-top: 16px; }
+button.stripe-shop-lite-checkout-btn {
+    background: #635bff; border-color: #635bff; color: #fff;
+    border: none; border-radius: 6px; padding: 12px 28px;
+    font-weight: 600; cursor: pointer;
+}
+button.stripe-shop-lite-checkout-btn:hover { filter: brightness(1.08); }
+.stripe-shop-lite-cart-page-empty { color: #777; }
+.stripe-shop-lite-products > .col { min-width: 0; }
+.stripe-shop-lite-products > .col > [class*="stripe-shop-lite-pgrid"] { width: 100%; }
+
+.stripe-shop-lite-cart-page { max-width: none; margin: 0 auto; padding: 0; }
+.stripe-shop-lite-cart-page > h1 { margin-bottom: 24px; }
+.stripe-shop-lite-cart-table { table-layout: fixed; }
+.stripe-shop-lite-cart-product { width: 40%; }
+.stripe-shop-lite-cart-qty { width: 230px; }
+.stripe-shop-lite-cart-unit, .stripe-shop-lite-cart-line { width: 120px; white-space: nowrap; }
+.stripe-shop-lite-cart-remove { width: 90px; text-align: right; white-space: nowrap; }
+@media (max-width: 767.98px) {
+    .stripe-shop-lite-cart-page { padding: 16px 12px; }
+    .stripe-shop-lite-cart-table { table-layout: auto; min-width: 760px; }
+    .stripe-shop-lite-cart-product { width: auto; }
+    .stripe-shop-lite-cart-qty { width: 220px; }
+}
+
+/* ---------- Restricted content message ---------- */
+
+.stripe-shop-lite-restricted {
+    background: #f6f6f6;
+    border-left: 4px solid #635bff;
+    padding: 16px 20px;
+    border-radius: 0 6px 6px 0;
+}
+/********************* Demo 1 **********************/
+.stripe-shop-lite-pgrid1{font-family:Raleway,sans-serif;text-align:center;padding:0 0 72px;border:1px solid rgba(0,0,0,.1);overflow:hidden;position:relative;z-index:1}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-pimg1{position:relative;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-pimg1 a{display:block}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-pimg1 img{width:100%;height:auto}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-pic-1{opacity:1;transition:all .3s ease-out 0s}
+.stripe-shop-lite-pgrid1:hover .stripe-shop-lite-pic-1{opacity:1}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-pic-2{opacity:0;position:absolute;top:0;left:0;transition:all .3s ease-out 0s}
+.stripe-shop-lite-pgrid1:hover .stripe-shop-lite-pic-2{opacity:1}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-psocial{width:150px;padding:0;margin:0;list-style:none;opacity:0;transform:translateY(-50%) translateX(-50%);position:absolute;top:60%;left:50%;z-index:1;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid1:hover .stripe-shop-lite-psocial{opacity:1;top:50%}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-psocial li{display:inline-block}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-psocial li a{color:#fff;background-color:#333;font-size:16px;line-height:40px;text-align:center;height:40px;width:40px;margin:0 2px;display:block;position:relative;transition:all .3s ease-in-out}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-psocial li a:hover{color:#fff;background-color:#635bff}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-psocial li a:after,.stripe-shop-lite-pgrid1 .stripe-shop-lite-psocial li a:before{content:attr(data-tip);color:#fff;background-color:#000;font-size:12px;letter-spacing:1px;line-height:20px;padding:1px 5px;white-space:nowrap;opacity:0;transform:translateX(-50%);position:absolute;left:50%;top:-30px}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-psocial li a:after{content:'';height:15px;width:15px;border-radius:0;transform:translateX(-50%) rotate(45deg);top:-20px;z-index:-1}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-psocial li a:hover:after,.stripe-shop-lite-pgrid1 .stripe-shop-lite-psocial li a:hover:before{opacity:1}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-discount-label,.stripe-shop-lite-pgrid1 .stripe-shop-lite-new-label{color:#fff;background-color:#635bff;font-size:12px;text-transform:uppercase;padding:2px 7px;display:block;position:absolute;top:10px;left:0}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-discount-label{background-color:#333;left:auto;right:0}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-prating{color:#FFD200;font-size:12px;padding:12px 0 0;margin:0;list-style:none;position:relative;z-index:-1}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-prating li.disable{color:rgba(0,0,0,.2)}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-pcontent{background-color:#fff;text-align:center;padding:12px 0;margin:0 auto;position:absolute;left:0;right:0;bottom:-27px;z-index:1;transition:all .3s}
+.stripe-shop-lite-pgrid1:hover .stripe-shop-lite-pcontent{bottom:0}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-ptitle{font-size:13px;font-weight:400;letter-spacing:.5px;text-transform:capitalize;margin:0 0 10px;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-ptitle a{color:#828282}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-ptitle a:hover,.stripe-shop-lite-pgrid1:hover .stripe-shop-lite-ptitle a{color:#635bff}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-pprice{color:#333;font-size:17px;font-family:Montserrat,sans-serif;font-weight:700;letter-spacing:.6px;margin-bottom:8px;text-align:center;transition:all .3s}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-pprice span{color:#999;font-size:13px;font-weight:400;text-decoration:line-through;margin-left:3px;display:inline-block}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-cart-btn{color:#000;font-size:13px;font-weight:600}
+@media only screen and (max-width:990px){.stripe-shop-lite-pgrid1{margin-bottom:30px}
+}
+/********************* Demo 2 **********************/
+
+.stripe-shop-lite-pgrid2{font-family:'Open Sans',sans-serif;position:relative}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-pimg2{overflow:hidden;position:relative}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-pimg2 a{display:block}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-pimg2 img{width:100%;height:auto}
+.stripe-shop-lite-pimg2 .stripe-shop-lite-pic-1{opacity:1;transition:all .5s}
+.stripe-shop-lite-pgrid2:hover .stripe-shop-lite-pimg2 .stripe-shop-lite-pic-1{opacity:0}
+.stripe-shop-lite-pimg2 .stripe-shop-lite-pic-2{width:100%;height:100%;opacity:0;position:absolute;top:0;left:0;transition:all .5s}
+.stripe-shop-lite-pgrid2:hover .stripe-shop-lite-pimg2 .stripe-shop-lite-pic-2{opacity:1}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-psocial{padding:0;margin:0;position:absolute;bottom:50px;right:25px;z-index:1}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-psocial li{margin:0 0 10px;display:block;transform:translateX(100px);transition:all .5s}
+.stripe-shop-lite-pgrid2:hover .stripe-shop-lite-psocial li{transform:translateX(0)}
+.stripe-shop-lite-pgrid2:hover .stripe-shop-lite-psocial li:nth-child(2){transition-delay:.15s}
+.stripe-shop-lite-pgrid2:hover .stripe-shop-lite-psocial li:nth-child(3){transition-delay:.25s}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-psocial li a{color:#505050;background-color:#fff;font-size:17px;line-height:45px;text-align:center;height:45px;width:45px;border-radius:50%;display:block;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-psocial li a:hover{color:#fff;background-color:#635bff;box-shadow:0 0 10px rgba(0,0,0,.5)}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-psocial li a:after,.stripe-shop-lite-pgrid2 .stripe-shop-lite-psocial li a:before{content:attr(data-tip);color:#fff;background-color:#000;font-size:12px;line-height:22px;border-radius:3px;padding:0 5px;white-space:nowrap;opacity:0;transform:translateX(-50%);position:absolute;left:50%;top:-30px}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-psocial li a:after{content:'';height:15px;width:15px;border-radius:0;transform:translateX(-50%) rotate(45deg);top:-22px;z-index:-1}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-psocial li a:hover:after,.stripe-shop-lite-pgrid2 .stripe-shop-lite-psocial li a:hover:before{opacity:1}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-cart-btn{color:#fff;background-color:#404040;font-size:15px;text-align:center;width:100%;padding:10px 0;display:block;position:absolute;left:0;bottom:-100%;transition:all .3s}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-cart-btn:hover{background-color:#635bff;text-decoration:none}
+.stripe-shop-lite-pgrid2:hover .stripe-shop-lite-cart-btn{bottom:0}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-new-label{background-color:#635bff;color:#fff;font-size:17px;padding:5px 10px;position:absolute;right:0;top:0;transition:all .3s}
+.stripe-shop-lite-pgrid2:hover .stripe-shop-lite-new-label{opacity:0}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-pcontent{padding:20px 10px;text-align:center}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-ptitle{font-size:17px;margin:0 0 7px}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-ptitle a{color:#303030}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-ptitle a:hover{color:#635bff}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-pprice{color:#303030;font-size:15px}
+@media screen and (max-width:990px){.stripe-shop-lite-pgrid2{margin-bottom:30px}
+}
+/********************* Demo 3 **********************/
+.stripe-shop-lite-pgrid3{font-family:Roboto,sans-serif;text-align:center;position:relative;z-index:1}
+.stripe-shop-lite-pgrid3:before{content:"";height:81%;width:100%;background:#fff;border:1px solid rgba(0,0,0,.1);opacity:0;position:absolute;top:0;left:0;z-index:-1;transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid3:hover:before{opacity:1;height:100%}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-pimg3{position:relative}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-pimg3 a{display:block}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-pimg3 img{width:100%;height:auto}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-pic-1{opacity:1;transition:all .5s ease-out 0s}
+.stripe-shop-lite-pgrid3:hover .stripe-shop-lite-pic-1{opacity:0}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-pic-2{position:absolute;top:0;left:0;opacity:0;transition:all .5s ease-out 0s}
+.stripe-shop-lite-pgrid3:hover .stripe-shop-lite-pic-2{opacity:1}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-psocial{width:120px;padding:0;margin:0 auto;list-style:none;opacity:0;position:absolute;right:0;left:0;bottom:-23px;transform:scale(0);transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid3:hover .stripe-shop-lite-psocial{opacity:1;transform:scale(1)}
+.stripe-shop-lite-pgrid3:hover .stripe-shop-lite-discount-label,.stripe-shop-lite-pgrid3:hover .stripe-shop-lite-new-label,.stripe-shop-lite-pgrid3:hover .stripe-shop-lite-ptitle{opacity:0}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-psocial li{display:inline-block}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-psocial li a{color:#635bff;background:#fff;font-size:18px;line-height:50px;width:50px;height:50px;border:1px solid rgba(0,0,0,.1);border-radius:50%;margin:0 2px;display:block;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-psocial li a:hover{background:#635bff;color:#fff}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-discount-label,.stripe-shop-lite-pgrid3 .stripe-shop-lite-new-label{background-color:#635bff;color:#fff;font-size:17px;padding:2px 10px;position:absolute;right:10px;top:10px;transition:all .3s}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-pcontent{z-index:-1;padding:15px;text-align:left}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-ptitle{font-size:14px;text-transform:capitalize;margin:0 0 7px;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-ptitle a{color:#414141}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-pprice{color:#000;font-size:16px;letter-spacing:1px;font-weight:600;margin-right:2px;display:inline-block}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-pprice span{color:#909090;font-size:14px;font-weight:500;letter-spacing:0;text-decoration:line-through;text-align:left;display:inline-block;margin-top:-2px}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-prating{padding:0;margin:-22px 0 0;list-style:none;text-align:right;display:block}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-prating li{color:#ffd200;font-size:13px;display:inline-block}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-prating li.disable{color:#dcdcdc}
+@media only screen and (max-width:1200px){.stripe-shop-lite-pgrid3 .stripe-shop-lite-prating{margin:0}
+}
+@media only screen and (max-width:990px){.stripe-shop-lite-pgrid3{margin-bottom:30px}
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-prating{margin:-22px 0 0}
+}
+@media only screen and (max-width:359px){.stripe-shop-lite-pgrid3 .stripe-shop-lite-prating{margin:0}
+}
+/********************* Demo 4 **********************/
+.stripe-shop-lite-pgrid4,.stripe-shop-lite-pgrid4 .stripe-shop-lite-pimg4{position:relative}
+.stripe-shop-lite-pgrid4{font-family:Poppins,sans-serif;text-align:center;border-radius:5px;overflow:hidden;z-index:1;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid4:hover{box-shadow:0 0 10px rgba(0,0,0,.2)}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-pimg4 a{display:block}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-pimg4 img{width:100%;height:auto}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-pic-1{opacity:1;transition:all .5s ease-out 0s}
+.stripe-shop-lite-pgrid4:hover .stripe-shop-lite-pic-1{opacity:0}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-pic-2{position:absolute;top:0;left:0;opacity:0;transition:all .5s ease-out 0s}
+.stripe-shop-lite-pgrid4:hover .stripe-shop-lite-pic-2{opacity:1}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial{width:180px;padding:0;margin:0 auto;list-style:none;position:absolute;right:0;left:0;top:50%;transform:translateY(-50%);transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li{display:inline-block;opacity:0;transition:all .7s}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li:nth-child(1){transition-delay:.15s}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li:nth-child(2){transition-delay:.3s}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li:nth-child(3){transition-delay:.45s}
+.stripe-shop-lite-pgrid4:hover .stripe-shop-lite-psocial li{opacity:1}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li a{color:#222;background:#fff;font-size:17px;line-height:36px;width:40px;height:36px;border-radius:2px;margin:0 5px;display:block;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li a:hover{color:#fff;background:#635bff}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li a:after,.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li a:before{content:attr(data-tip);color:#fff;background-color:#000;font-size:12px;line-height:20px;border-radius:3px;padding:0 5px;white-space:nowrap;opacity:0;transform:translateX(-50%);position:absolute;left:50%;top:-30px}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li a:after{content:'';height:15px;width:15px;border-radius:0;transform:translateX(-50%) rotate(45deg);top:-22px;z-index:-1}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li a:hover:after,.stripe-shop-lite-pgrid4 .stripe-shop-lite-psocial li a:hover:before{opacity:1}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-discount-label,.stripe-shop-lite-pgrid4 .stripe-shop-lite-new-label{color:#fff;background-color:#635bff;font-size:13px;font-weight:800;text-transform:uppercase;line-height:45px;height:45px;width:45px;border-radius:50%;position:absolute;left:10px;top:15px;transition:all .3s}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-discount-label{left:auto;right:10px;background-color:#635bff}
+.stripe-shop-lite-pgrid4:hover .stripe-shop-lite-new-label{opacity:0}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-pcontent{padding:25px}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-ptitle{font-size:15px;font-weight:400;text-transform:capitalize;margin:0 0 7px;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-ptitle a{color:#222}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-ptitle a:hover{color:#635bff}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-pprice{color:#635bff;font-size:17px;font-weight:700;margin:0 2px 15px 0;display:block}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-pprice span{color:#909090;font-size:13px;font-weight:400;letter-spacing:0;text-decoration:line-through;text-align:left;vertical-align:middle;display:inline-block}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-cart-btn{border:1px solid #e5e5e5;display:inline-block;padding:10px 20px;color:#888;font-weight:600;font-size:14px;border-radius:4px;transition:all .3s}
+.stripe-shop-lite-pgrid4:hover .stripe-shop-lite-cart-btn{border:1px solid transparent;background:#635bff;color:#fff}
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-cart-btn:hover{background-color:#505050;box-shadow:0 0 10px rgba(0,0,0,.5)}
+@media only screen and (max-width:990px){.stripe-shop-lite-pgrid4{margin-bottom:30px}
+}
+/********************* Demo 5 **********************/
+.stripe-shop-lite-pimg5 .stripe-shop-lite-pic-1,.stripe-shop-lite-pimg5 .stripe-shop-lite-pic-2{backface-visibility:hidden;transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid5{font-family:Poppins,sans-serif;position:relative}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-pimg5{overflow:hidden;position:relative}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-pimg5 a{display:block}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-pimg5 img{width:100%;height:auto}
+.stripe-shop-lite-pimg5 .stripe-shop-lite-pic-1{opacity:1}
+.stripe-shop-lite-pgrid5:hover .stripe-shop-lite-pimg5 .stripe-shop-lite-pic-1{opacity:0}
+.stripe-shop-lite-pimg5 .stripe-shop-lite-pic-2{width:100%;height:100%;opacity:0;position:absolute;top:0;left:0}
+.stripe-shop-lite-pgrid5:hover .stripe-shop-lite-pimg5 .stripe-shop-lite-pic-2{opacity:1}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-psocial{padding:0;margin:0;position:absolute;top:10px;right:10px}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-psocial li{display:block;margin:0 0 10px;transition:all .5s}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-psocial li:nth-child(2){opacity:0;transform:translateY(-50px)}
+.stripe-shop-lite-pgrid5:hover .stripe-shop-lite-psocial li:nth-child(2){opacity:1;transform:translateY(0)}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-psocial li:nth-child(3){opacity:0;transform:translateY(-50px)}
+.stripe-shop-lite-pgrid5:hover .stripe-shop-lite-psocial li:nth-child(3){opacity:1;transform:translateY(0);transition-delay:.2s}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-psocial li a{color:#888;background:#fff;font-size:14px;text-align:center;line-height:40px;height:40px;width:40px;border-radius:50%;display:block;transition:.5s ease 0s}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-psocial li a:hover{color:#fff;background:#635bff}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-select-options{color:#777;background-color:#fff;font-size:13px;font-weight:400;text-align:center;text-transform:uppercase;padding:15px 5px;margin:0 auto;opacity:0;display:block;position:absolute;width:92%;left:0;bottom:-100px;right:0;transition:.5s ease 0s}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-select-options:hover{color:#fff;background-color:#635bff;text-decoration:none}
+.stripe-shop-lite-pgrid5:hover .stripe-shop-lite-select-options{opacity:1;bottom:10px}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-pcontent{padding:20px 10px}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-ptitle{font-size:15px;font-weight:600;text-transform:capitalize;margin:0 0 10px;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-ptitle a{color:#222}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-ptitle a:hover{color:#635bff}
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-pprice{color:#222;font-size:13px;font-weight:500;letter-spacing:1px}
+@media only screen and (max-width:990px){.stripe-shop-lite-pgrid5{margin-bottom:30px}
+}
+/********************* Demo 6 **********************/
+.stripe-shop-lite-pgrid6,.stripe-shop-lite-pgrid6 .stripe-shop-lite-pimg6{overflow:hidden}
+.stripe-shop-lite-pgrid6{font-family:'Open Sans',sans-serif;text-align:center;position:relative;transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid6:hover{box-shadow:0 0 10px rgba(0,0,0,.3)}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-pimg6 a{display:block}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-pimg6 img{width:100%;height:auto;transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid6:hover .stripe-shop-lite-pimg6 img{transform:scale(1.1)}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-pcontent{padding:12px 12px 15px;transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid6:hover .stripe-shop-lite-pcontent{opacity:0}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-ptitle{font-size:20px;font-weight:600;text-transform:capitalize;margin:0 0 10px;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-ptitle a{color:#000}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-ptitle a:hover{color:#635bff}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-pprice{font-size:18px;font-weight:600;color:#635bff}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-pprice span{color:#999;font-size:15px;font-weight:400;text-decoration:line-through;margin-left:7px;display:inline-block}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-psocial{background-color:#fff;width:100%;padding:0;margin:0;list-style:none;opacity:0;transform:translateX(-50%);position:absolute;bottom:-50%;left:50%;z-index:1;transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid6:hover .stripe-shop-lite-psocial{opacity:1;bottom:20px}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-psocial li{display:inline-block}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-psocial li a{color:#909090;font-size:16px;line-height:45px;text-align:center;height:45px;width:45px;margin:0 7px;border:1px solid #909090;border-radius:50px;display:block;position:relative;transition:all .3s ease-in-out}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-psocial li a:hover{color:#fff;background-color:#635bff;width:80px}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-psocial li a:after,.stripe-shop-lite-pgrid6 .stripe-shop-lite-psocial li a:before{content:attr(data-tip);color:#fff;background-color:#635bff;font-size:12px;letter-spacing:1px;line-height:20px;padding:1px 5px;border-radius:5px;white-space:nowrap;opacity:0;transform:translateX(-50%);position:absolute;left:50%;top:-30px}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-psocial li a:after{content:'';height:15px;width:15px;border-radius:0;transform:translateX(-50%) rotate(45deg);top:-20px;z-index:-1}
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-psocial li a:hover:after,.stripe-shop-lite-pgrid6 .stripe-shop-lite-psocial li a:hover:before{opacity:1}
+@media only screen and (max-width:990px){.stripe-shop-lite-pgrid6{margin-bottom:30px}
+}
+/********************* Demo 7 **********************/
+.stripe-shop-lite-pgrid7{font-family:'Roboto Slab',serif;position:relative;z-index:1}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-pimg7{border:1px solid rgba(0,0,0,.1);overflow:hidden;perspective:1500px;position:relative;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-pimg7 a{display:block}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-pimg7 img{width:100%;height:auto}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-pic-1{opacity:1;transition:all .5s ease-out 0s}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-pic-2{opacity:0;transform:rotateY(-90deg);position:absolute;top:0;left:0;transition:all .5s ease-out 0s}
+.stripe-shop-lite-pgrid7:hover .stripe-shop-lite-pic-2{opacity:1;transform:rotateY(0)}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-psocial{padding:0;margin:0;list-style:none;position:absolute;bottom:3px;left:-20%;z-index:1;transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid7:hover .stripe-shop-lite-psocial{left:17px}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-psocial li a{color:#fff;background-color:#333;font-size:16px;line-height:40px;text-align:center;height:40px;width:40px;margin:15px 0;border-radius:50%;display:block;transition:all .5s ease-in-out}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-psocial li a:hover{color:#fff;background-color:#635bff}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-new-label{color:#fff;background-color:#333;padding:5px 10px;border-radius:5px;display:block;position:absolute;top:10px;left:10px}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-pcontent{text-align:center;padding:20px 0 0}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-ptitle{font-size:15px;font-weight:600;text-transform:capitalize;margin:0 0 10px;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-ptitle a{color:#333}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-ptitle a:hover{color:#635bff}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-prating{color:#635bff;font-size:12px;padding:0;margin:0 0 10px;list-style:none}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-pprice{color:#333;font-size:20px;font-family:Lora,serif;font-weight:700;margin-bottom:8px;text-align:center;transition:all .3s}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-pprice span{color:#999;font-size:14px;font-weight:700;text-decoration:line-through;margin-left:7px;display:inline-block}
+@media only screen and (max-width:990px){.stripe-shop-lite-pgrid7{margin-bottom:30px}
+}
+/********************* Demo 8 **********************/
+.stripe-shop-lite-pgrid8{font-family:Poppins,sans-serif;position:relative;z-index:1}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pimg8{border:1px solid #e4e9ef;position:relative;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid8:hover .stripe-shop-lite-pimg8{box-shadow:0 0 10px rgba(0,0,0,.15)}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pimg8 a{display:block}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pimg8 img{width:100%;height:auto}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pic-1{opacity:1;transition:all .5s ease-out 0s}
+.stripe-shop-lite-pgrid8:hover .stripe-shop-lite-pic-1{opacity:0}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pic-2{opacity:0;position:absolute;top:0;left:0;transition:all .5s ease-out 0s}
+.stripe-shop-lite-pgrid8:hover .stripe-shop-lite-pic-2{opacity:1}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-psocial{padding:0;margin:0;list-style:none;position:absolute;bottom:13px;right:13px;z-index:1}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-psocial li{opacity:0;transform:translateY(3px);transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid8:hover .stripe-shop-lite-psocial li{margin:0 0 10px;opacity:1;transform:translateY(0)}
+.stripe-shop-lite-pgrid8:hover .stripe-shop-lite-psocial li:nth-child(1){transition-delay:.1s}
+.stripe-shop-lite-pgrid8:hover .stripe-shop-lite-psocial li:nth-child(2){transition-delay:.2s}
+.stripe-shop-lite-pgrid8:hover .stripe-shop-lite-psocial li:nth-child(3){transition-delay:.4s}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-psocial li a{color:gray;font-size:17px;line-height:40px;text-align:center;height:40px;width:40px;border:1px solid gray;display:block;transition:all .5s ease-in-out}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-psocial li a:hover{color:#000;border-color:#000}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-discount-label{display:block;padding:4px 15px 4px 30px;color:#fff;background-color:#635bff;position:absolute;top:10px;right:0;-webkit-clip-path:polygon(34% 0,100% 0,100% 100%,0 100%);clip-path:polygon(34% 0,100% 0,100% 100%,0 100%)}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pcontent{padding:20px 0 0}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pprice{color:#000;font-size:19px;font-weight:400;margin-bottom:8px;text-align:left;transition:all .3s}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pprice span{color:#999;font-size:14px;font-weight:500;text-decoration:line-through;margin-left:7px;display:inline-block}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-shipping{color:rgba(0,0,0,.5);font-size:15px;padding-left:35px;margin:0 0 15px;display:block;position:relative}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-shipping:before{content:'';height:1px;width:25px;background-color:rgba(0,0,0,.5);transform:translateY(-50%);position:absolute;top:50%;left:0}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-ptitle{font-size:16px;font-weight:400;text-transform:capitalize;margin:0 0 30px;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-ptitle a{color:#000}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-ptitle a:hover{color:#635bff}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-all-deals{display:block;color:#fff;background-color:#2e353b;font-size:15px;letter-spacing:1px;text-align:center;text-transform:uppercase;padding:22px 5px;transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-all-deals .icon{margin-left:7px}
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-all-deals:hover{background-color:#635bff}
+@media only screen and (max-width:990px){.stripe-shop-lite-pgrid8{margin-bottom:30px}
+}
+/********************* Demo 9 **********************/
+.stripe-shop-lite-pgrid9,.stripe-shop-lite-pgrid9 .stripe-shop-lite-pimg9{position:relative}
+.stripe-shop-lite-pgrid9{font-family:Poppins,sans-serif;z-index:1}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-pimg9 a{display:block}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-pimg9 img{width:100%;height:auto}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-pic-1{opacity:1;transition:all .5s ease-out 0s}
+.stripe-shop-lite-pgrid9:hover .stripe-shop-lite-pic-1{opacity:0}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-pic-2{position:absolute;top:0;left:0;opacity:0;transition:all .5s ease-out 0s}
+.stripe-shop-lite-pgrid9:hover .stripe-shop-lite-pic-2{opacity:1}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-full-view{color:#505050;background-color:#fff;font-size:16px;height:45px;width:45px;padding:18px;border-radius:100px 0 0;display:block;opacity:0;position:absolute;right:0;bottom:0;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-full-view:hover{color:#635bff}
+.stripe-shop-lite-pgrid9:hover .stripe-shop-lite-full-view{opacity:1}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-pcontent{padding:12px 12px 0;overflow:hidden;position:relative}
+.stripe-shop-lite-pcontent .stripe-shop-lite-prating{padding:0;margin:0 0 7px;list-style:none}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-prating li{font-size:12px;color:#ffd200;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-prating li.disable{color:rgba(0,0,0,.2)}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-ptitle{font-size:16px;font-weight:400;text-transform:capitalize;margin:0 0 3px;transition:all .3s ease 0s}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-ptitle a{color:rgba(0,0,0,.5)}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-ptitle a:hover{color:#635bff}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-pprice{color:#000;font-size:17px;margin:0;display:block;transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid9:hover .stripe-shop-lite-pprice{opacity:0}
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-cart-btn{display:block;color:#635bff;font-weight:600;font-size:14px;opacity:0;position:absolute;left:10px;bottom:-20px;transition:all .5s ease 0s}
+.stripe-shop-lite-pgrid9:hover .stripe-shop-lite-cart-btn{opacity:1;bottom:0}
+@media only screen and (max-width:990px){.stripe-shop-lite-pgrid9{margin-bottom:30px}
+}
+
+/* Cart drawer: with Bootstrap ON the drawer is a real BS5 offcanvas; these
+   rules style OUR parts inside it (badge, line items, total, footer buttons).
+   The hand-rolled panel styles live in store.js and only load when Bootstrap
+   is off. */
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-badge { background: #111; color: #fff; border-radius: 999px; min-width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; padding: 0 6px; }
+.stripe-shop-lite-drawer .stripe-shop-lite-line { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+.stripe-shop-lite-drawer .stripe-shop-lite-line-thumb { width: 46px; height: 46px; object-fit: cover; background: #f5f5f5; flex: none; }
+.stripe-shop-lite-drawer .stripe-shop-lite-line-title { font-size: 14px; font-weight: 500; text-decoration: none; color: inherit; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stripe-shop-lite-drawer .stripe-shop-lite-line-qty { font-size: 13px; color: #555; }
+.stripe-shop-lite-drawer .stripe-shop-lite-line-price { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.stripe-shop-lite-drawer .stripe-shop-lite-remove { background: none; border: none; color: #c00; cursor: pointer; font-size: 12px; text-decoration: underline; flex: none; }
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-total { padding: 12px 16px; font-weight: 600; font-size: 15px; border-top: 1px solid #eee; }
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-foot { padding: 16px; border-top: 1px solid #eee; display: flex; flex-direction: column; gap: 8px; }
+.stripe-shop-lite-drawer .stripe-shop-lite-checkout-btn { background: #635bff; color: #fff; border: none; border-radius: 6px; padding: 12px; font-size: 15px; font-weight: 600; cursor: pointer; }
+.stripe-shop-lite-drawer .stripe-shop-lite-checkout-btn:disabled { opacity: .6; cursor: wait; }
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-cartpage { font-size: 13px; text-align: center; color: #555; }
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-head { display: flex; align-items: center; gap: 8px; padding: 14px 16px; border-bottom: 1px solid #eee; }
+
+/* The action link is an <a> so it still works without JavaScript. */
+.stripe-shop-lite-pgrid1 a.stripe-shop-lite-cart-btn, .stripe-shop-lite-pgrid2 a.stripe-shop-lite-cart-btn, .stripe-shop-lite-pgrid3 a.stripe-shop-lite-cart-btn,
+.stripe-shop-lite-pgrid4 a.stripe-shop-lite-cart-btn, .stripe-shop-lite-pgrid5 a.stripe-shop-lite-cart-btn, .stripe-shop-lite-pgrid6 a.stripe-shop-lite-cart-btn,
+.stripe-shop-lite-pgrid7 a.stripe-shop-lite-cart-btn, .stripe-shop-lite-pgrid8 a.stripe-shop-lite-cart-btn, .stripe-shop-lite-pgrid9 a.stripe-shop-lite-cart-btn { text-decoration: none; }
+.stripe-shop-lite-unavailable { font-size: 13px; color: #999; font-style: italic; }
+.stripe-shop-lite-pprice .stripe-shop-lite-recurring { font-weight: 400; color: #666; font-size: .85em; }
+
+/* ============================================================
+   SINGLE PRODUCT PAGE - two columns: gallery left, buy box right,
+   tabbed additional info / sizing chart / comments underneath.
+   ============================================================ */
+
+.stripe-shop-lite-product-page { max-width: 1100px; margin: 0 auto; padding: 24px; }
+.stripe-shop-lite-single-main-img { width: 100%; height: auto; border-radius: 8px; display: block; background: #f5f5f5; }
+.stripe-shop-lite-single-thumbs { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.stripe-shop-lite-single-thumb { width: 72px; height: 72px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; }
+.stripe-shop-lite-single-thumb.is-active { border-color: #333; }
+
+.stripe-shop-lite-product-title { margin: 0 0 8px; }
+.stripe-shop-lite-product-price { font-size: 26px; font-weight: 700; margin: 0 0 12px; }
+.stripe-shop-lite-single-kind { margin: 0 0 12px; display: flex; gap: 6px; }
+.stripe-shop-lite-single-desc { margin-bottom: 20px; }
+.stripe-shop-lite-single-meta { font-size: 14px; color: #555; margin: 0 0 6px; }
+.stripe-shop-lite-product-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 16px; }
+.stripe-shop-lite-product-actions button.stripe-shop-lite-add { font-size: 16px; padding: 12px 28px; }
+.stripe-shop-lite-stock { color: #666; font-size: 14px; margin: 0; }
+
+.stripe-shop-lite-single-tabs { margin-top: 40px; }
+.stripe-shop-lite-info-table { max-width: 640px; }
+.stripe-shop-lite-info-table th { width: 180px; }
+
+/* Bootstrap absent: tabs stay real tabs (store.js handles clicks); badges/progress get plain styles. */
+.stripe-shop-lite-no-bs .tab-content > .tab-pane { display: none; }
+.stripe-shop-lite-no-bs .tab-content > .tab-pane.active { display: block; }
+.stripe-shop-lite-no-bs .nav-tabs { display: flex; gap: 8px; list-style: none; padding: 0; margin: 0 0 16px; border-bottom: 1px solid #dee2e6; flex-wrap: wrap; }
+.stripe-shop-lite-no-bs .nav-tabs .nav-link { border: none; background: none; cursor: pointer; padding: 10px 16px; color: #555; font-size: 15px; }
+.stripe-shop-lite-no-bs .nav-tabs .nav-link.active { color: #333; border-bottom: 2px solid #333; margin-bottom: -1px; }
+.stripe-shop-lite-no-bs .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+.stripe-shop-lite-no-bs .text-bg-secondary { background: #6c757d; color: #fff; }
+.stripe-shop-lite-no-bs .text-bg-info { background: #0dcaf0; color: #000; }
+.stripe-shop-lite-no-bs .progress { height: 10px; background: #e9ecef; border-radius: 999px; overflow: hidden; }
+.stripe-shop-lite-no-bs .progress-bar { background: #28a745; height: 100%; }
+/* ============================================================
+   ACCOUNT DASHBOARD ([store_my_account]) - Bootstrap-Dashboard
+   look on the FRONT-END: top bar + stat cards + content.
+   Never touches wp-admin.
+   ============================================================ */
+
+.stripe-shop-lite-db { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+/* Top bar */
+.stripe-shop-lite-db-topbar { display: flex; align-items: center; gap: 14px; background: #212529; color: #fff; border-radius: 10px; padding: 10px 16px; margin-bottom: 24px; }
+.stripe-shop-lite-db-menu-btn { background: none; border: 0; padding: 8px; cursor: pointer; border-radius: 6px; }
+.stripe-shop-lite-db-menu-btn:hover { background: rgba(255,255,255,.08); }
+.stripe-shop-lite-db-burger { display: inline-block; width: 22px; height: 2px; background: #fff; position: relative; }
+.stripe-shop-lite-db-burger::before, .stripe-shop-lite-db-burger::after { content: ""; position: absolute; left: 0; width: 22px; height: 2px; background: #fff; }
+.stripe-shop-lite-db-burger::before { top: -6px; } .stripe-shop-lite-db-burger::after { top: 6px; }
+.stripe-shop-lite-db-brand { font-weight: 700; font-size: 17px; }
+.stripe-shop-lite-db-topuser { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 14px; color: #ced4da; }
+.stripe-shop-lite-db-topuser-name { white-space: nowrap; }
+.stripe-shop-lite-db-avatar { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: #635bff; color: #fff; font-weight: 600; font-size: 16px; flex: none; }
+.stripe-shop-lite-db-topuser .stripe-shop-lite-db-avatar { width: 32px; height: 32px; font-size: 14px; }
+
+/* Offcanvas menu (standard BS5 component + own fallback styles below) */
+.stripe-shop-lite-db-nav { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.stripe-shop-lite-db-nav a { display: block; color: #333; text-decoration: none; padding: 10px 12px; border-radius: 6px; font-size: 15px; }
+.stripe-shop-lite-db-nav a:hover { background: #f1f3f5; }
+.stripe-shop-lite-db-nav i { width: 22px; margin-right: 10px; text-align: center; }
+
+/* Content */
+.stripe-shop-lite-db-main { min-width: 0; }
+.stripe-shop-lite-db-section { margin-bottom: 40px; scroll-margin-top: 24px; }
+.stripe-shop-lite-db-h1 { font-size: 26px; font-weight: 700; margin: 4px 0 20px; }
+.stripe-shop-lite-db-h2 { font-size: 19px; font-weight: 700; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid #eee; }
+
+.stripe-shop-lite-db-card { background: #fff; border: 1px solid #e9ecef; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.stripe-shop-lite-db-card h6 { margin: 0; color: #6c757d; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; }
+.stripe-shop-lite-db-big { font-size: 30px; font-weight: 700; line-height: 1; }
+.stripe-shop-lite-db-small { font-size: 13px; color: #555; }
+.stripe-shop-lite-db-note { font-size: 13px; color: #777; margin: 0; }
+.stripe-shop-lite-db-copy { width: 100%; padding: 8px 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 12px; color: #333; background: #f8f9fa; }
+.stripe-shop-lite-db-progress { width: 100%; }
+.stripe-shop-lite-db-checklist { list-style: none; margin: 0; padding: 0; font-size: 14px; display: flex; flex-direction: column; gap: 4px; }
+.stripe-shop-lite-db-checklist li::before { content: "- "; color: #adb5bd; }
+.stripe-shop-lite-db-checklist li.is-done::before { content: "[done] "; color: #28a745; }
+
+/* Staff dashboard stat cards + quick action buttons (content, not menu) */
+.stripe-shop-lite-db-stats .stripe-shop-lite-db-card { border-top: 3px solid #635bff; }
+.stripe-shop-lite-db-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+/* Orders / subscriptions tables inside the dashboard keep readable styling
+   whether or not Bootstrap is loaded. */
+.stripe-shop-lite-db table.stripe-shop-lite-orders { width: 100%; border-collapse: collapse; }
+.stripe-shop-lite-db table.stripe-shop-lite-orders th, .stripe-shop-lite-db table.stripe-shop-lite-orders td { padding: 8px 10px; border-bottom: 1px solid #eee; text-align: left; font-size: 14px; }
+
+/* Bootstrap absent: stand-ins for the BS5 pieces the dashboard uses. */
+.stripe-shop-lite-no-bs .btn { display: inline-block; padding: 8px 16px; font-size: 15px; border-radius: 6px; border: 1px solid transparent; cursor: pointer; text-decoration: none; text-align: center; }
+.stripe-shop-lite-no-bs .btn-sm { padding: 5px 12px; font-size: 13px; }
+.stripe-shop-lite-no-bs .btn-primary { background: #635bff; color: #fff; }
+.stripe-shop-lite-no-bs .btn-success { background: #28a745; color: #fff; }
+.stripe-shop-lite-no-bs .btn-outline-secondary { background: none; border-color: #6c757d; color: #333; }
+.stripe-shop-lite-no-bs .btn-outline-secondary:hover { background: #f1f3f5; }
+.stripe-shop-lite-no-bs .btn-danger, .stripe-shop-lite-no-bs .stripe-shop-lite-cart-remove .btn { background: #dc3545; border-color: #dc3545; color: #fff; }
+.stripe-shop-lite-no-bs .btn-close { background: none; border: 0; font-size: 22px; line-height: 1; cursor: pointer; color: #000; }
+.stripe-shop-lite-no-bs .offcanvas { position: fixed; top: 0; left: 0; bottom: 0; width: 300px; max-width: 85vw; background: #fff; color: #333; z-index: 1050; padding: 16px; box-shadow: 0 0 20px rgba(0,0,0,.25); transform: translateX(-100%); transition: transform .25s ease; }
+.stripe-shop-lite-no-bs .offcanvas.showing, .stripe-shop-lite-no-bs .offcanvas.show { transform: translateX(0); }
+.stripe-shop-lite-no-bs .offcanvas-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.stripe-shop-lite-no-bs .offcanvas-title { font-size: 17px; font-weight: 700; margin: 0; }
+
+/* ---------- Cross-sell (cart page; drawer styles injected by store.js) ---------- */
+
+.stripe-shop-lite-crosssell { margin-top: 24px; }
+.stripe-shop-lite-crosssell-title { font-size: 15px; font-weight: 600; margin: 0 0 10px; }
+.stripe-shop-lite-crosssell a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; border: 1px solid #eee; border-radius: 8px; padding: 10px; }
+.stripe-shop-lite-crosssell a:hover { border-color: #635bff; }
+.stripe-shop-lite-crosssell img, .stripe-shop-lite-crosssell-noimg { width: 48px; height: 48px; object-fit: cover; border-radius: 6px; background: #f5f5f5; flex: none; }
+.stripe-shop-lite-crosssell em { font-style: normal; color: #555; font-size: 12px; display: block; }
+
+/* ---------- Pagination ---------- */
+
+.stripe-shop-lite-pagination { margin: 24px 0; display: flex; gap: 6px; flex-wrap: wrap; }
+.stripe-shop-lite-pagination .page-numbers { padding: 8px 14px; border: 1px solid #ddd; border-radius: 6px; text-decoration: none; color: #333; }
+.stripe-shop-lite-pagination .page-numbers.current { background: #111; color: #fff; border-color: #111; }
+.stripe-shop-lite-infinite-sentinel { height: 1px; }
+/* Requested product archive / demo consistency fixes. */
+body.post-type-archive-product #page{padding-left:3rem!important;padding-right:3rem!important}
+.stripe-shop-lite-filters{max-width:100%;margin:0 auto 24px;padding:16px 24px;border:1px solid #eee;border-radius:2px;background:#fff;border-top:0}
+.stripe-shop-lite-filter input,.stripe-shop-lite-filter select{padding:8px 10px;border:1px solid #eee;border-radius:2px;min-width:200px}
+.stripe-shop-lite-filter-apply{background:#635bff;border-radius:3px;padding:5px 22px}
+.stripe-shop-lite-filter-apply:hover,.stripe-shop-lite-filter-apply:focus{background:#5148e8;color:#fff}
+body.post-type-archive-product .pin-it-btn-wrapper{position:relative;display:block}
+body.single-product .nav-tabs .nav-link{color:#000}
+body.single-product .nav-item.show .nav-link,body.single-product .nav-tabs .nav-link.active{color:#635bff}
+.stripe-shop-lite-detail-qty{width:132px}
+.stripe-shop-lite-detail-qty .stripe-shop-lite-product-qty{text-align:center;max-width:56px}
+.stripe-shop-lite-single-gallery .carousel-container{min-height:500px}
+.stripe-shop-lite-single-gallery .carousel-thumbnails{width:92px;flex:0 0 92px}
+.stripe-shop-lite-single-gallery .carousel-thumbnails button{width:92px;height:92px;padding:0;border:2px solid #dee2e6;background:#fff;border-radius:.375rem;overflow:hidden}
+.stripe-shop-lite-single-gallery .carousel-thumbnails button.active{border-color:#635bff}
+.stripe-shop-lite-single-gallery .carousel-thumbnails img{width:100%;height:100%;object-fit:cover}
+.stripe-shop-lite-single-gallery .carousel-main{min-width:0}
+.stripe-shop-lite-single-gallery .carousel-inner,.stripe-shop-lite-single-gallery .zoom-container{height:500px}
+.stripe-shop-lite-single-gallery .zoom-container{overflow:hidden;position:relative;cursor:crosshair;border-radius:12px}
+.stripe-shop-lite-single-gallery .zoom-img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease,transform-origin .5s ease}
+.stripe-shop-lite-single-gallery .zoom-container:hover .zoom-img{transform:scale(1.25);transform-origin:center center}
+.stripe-shop-lite-like-fallback{text-decoration:none}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-cart-btn:hover{background-color:#635bff;text-decoration:none}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-new-label{background-color:#635bff;color:#fff}
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-ptitle a:hover{color:#635bff}
+.stripe-shop-lite-search-summary,.stripe-shop-lite-tax-summary{padding-left:0;padding-right:0}
+@media(max-width:767.98px){
+body.post-type-archive-product #page{padding-left:1rem!important;padding-right:1rem!important}
+.stripe-shop-lite-single-gallery .carousel-container{min-height:0}
+.stripe-shop-lite-single-gallery .carousel-thumbnails{width:64px;flex-basis:64px}
+.stripe-shop-lite-single-gallery .carousel-thumbnails button{width:64px;height:64px}
+.stripe-shop-lite-single-gallery .carousel-inner,.stripe-shop-lite-single-gallery .zoom-container{height:360px}
+}
+
+/* Bootstrap 5 account/dashboard patch.
+   Bootstrap owns the layout. No CSS grid and no custom grid fallback. */
+.stripe-shop-lite-db-cards{margin-left:0;margin-right:0}
+.stripe-shop-lite-db-stats .stripe-shop-lite-db-card{border-top:3px solid #635bff}
+.stripe-shop-lite-db-tabs{margin-top:28px}
+.stripe-shop-lite-db-tab-content{min-width:0}
+.stripe-shop-lite-db-tab-content .stripe-shop-lite-db-section{margin-bottom:0}
+.stripe-shop-lite-db-customer .stripe-shop-lite-db-menu-btn,
+.stripe-shop-lite-db-customer .stripe-shop-lite-db-offcanvas{display:none!important}
+
+.offcanvas {
+    z-index: 99999 !important;
+    border-left: none !important;
+}
+
+.stripe-shop-lite-like-item{position:relative}
+.stripe-shop-lite-like-item > a.stripe-shop-lite-like-fallback{display:block;text-decoration:none}
+.stripe-shop-lite-like-item[data-is-liked="true"] > a.stripe-shop-lite-like-fallback{color:#635bff}
+
+
+/* Requested Bootstrap 5 visual fixes. */
+.stripe-shop-lite-cart-page-checkout,
+.stripe-shop-lite-product-actions .stripe-shop-lite-add { background:#635bff !important; color:#fff !important; border-color:#635bff !important; }
+.stripe-shop-lite-cart-page-checkout:hover,
+.stripe-shop-lite-product-actions .stripe-shop-lite-add:hover { background:#5148e8 !important; color:#fff !important; }
+.stripe-shop-lite-purple-badge { background:#635bff !important; color:#fff !important; border:0; }
+.stripe-shop-lite-detail-qty { width:auto !important; max-width:100%; height:58px; border:1px solid #d8d5cf; border-radius:3px; background:#fff; overflow:hidden; display:inline-flex !important; flex:0 0 auto; }
+.stripe-shop-lite-detail-qty-btn { width:58px; flex:0 0 58px; height:56px; border:0; background:transparent; color:#111; font-size:24px; line-height:1; padding:0; }
+.stripe-shop-lite-detail-qty-btn:hover { background:#f7f6f3; }
+.stripe-shop-lite-detail-qty .stripe-shop-lite-product-qty { width:70px; flex:0 0 70px; height:56px; border:0; background:transparent; box-shadow:none; text-align:center; font-size:20px; font-weight:600; padding:0; -moz-appearance:textfield; }
+.stripe-shop-lite-detail-qty .stripe-shop-lite-product-qty::-webkit-outer-spin-button,
+.stripe-shop-lite-detail-qty .stripe-shop-lite-product-qty::-webkit-inner-spin-button { -webkit-appearance:none; margin:0; }
+.stripe-shop-lite-breadcrumbs { margin-bottom:0; }
+.stripe-shop-lite-breadcrumbs .breadcrumb-item a { color:#111; text-decoration:none; }
+.stripe-shop-lite-breadcrumbs .breadcrumb-item a:hover { color:#635bff; }
+.stripe-shop-lite-breadcrumbs .breadcrumb-item.active { color:#635bff; }
+.stripe-shop-lite-cart-page-checkout { border-radius:3px !important; }
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-total { margin-left:0; margin-right:0; }
+.stripe-shop-lite-crosssell .row { --bs-gutter-x: .75rem; --bs-gutter-y: .75rem; }
+.stripe-shop-lite-crosssell .col { min-width:0; }
+.stripe-shop-lite-crosssell a { min-width:0; width:100%; box-sizing:border-box; }
+.stripe-shop-lite-crosssell a span { min-width:0; overflow-wrap:anywhere; }
+@media (max-width: 575.98px) {
+  .stripe-shop-lite-crosssell .row { row-gap:.5rem; }
+  .stripe-shop-lite-crosssell .col { flex:0 0 100%; max-width:100%; }
+  .stripe-shop-lite-detail-qty { width:auto !important; }
+  .stripe-shop-lite-detail-qty-btn { width:54px; flex-basis:54px; }
+  .stripe-shop-lite-detail-qty .stripe-shop-lite-product-qty { width:70px; flex-basis:70px; }
+}
+
+
+/* =====================================================================
+   LEADSTART MEDIA DESIGN LAYER  v1.0  — appended to store.css
+   ---------------------------------------------------------------------
+   Re-skins the plugin's own markup. All original rules above are kept
+   so every plugin feature (pgrid demos, dashboard, drawer, no-BS
+   fallbacks) keeps working; the rules below override the colors.
+   - Purple #635bff is the ONLY solid accent.
+   - Pink / yellow appear ONLY inside the gradient (rating stars,
+     "10% OFF" tags, discount labels).
+   - Dark / light mode is driven by data-bs-theme on <html>, set by the
+     small script included in the replaced templates + the round
+     #lsm-theme-toggle button (bottom-right).
+   ===================================================================== */
+
+/* ---------- 1. Design tokens ---------- */
+:root {
+    --lsm-purple: #635bff;
+    --lsm-purple-600: #7a6fff;
+    --lsm-purple-deep: #5148e8;
+    --lsm-purple-soft: rgba(99, 91, 255, .14);
+    --lsm-purple-line: rgba(99, 91, 255, .4);
+    --lsm-grad: linear-gradient(90deg, #e7f524 30%, #f12d4a 55%, #d08be7 100%);
+
+    /* light mode */
+    --lsm-bg: #f4f4f8;
+    --lsm-surface: #ffffff;
+    --lsm-surface-2: #ededf3;
+    --lsm-line: #e2e2ea;
+    --lsm-text: #15151a;
+    --lsm-muted: #65656f;
+    --lsm-radius: 14px;
+}
+
+[data-bs-theme="dark"] {
+    --lsm-bg: #0a0a0a;
+    --lsm-surface: #131313;
+    --lsm-surface-2: #1a1a1a;
+    --lsm-line: #272727;
+    --lsm-text: #f5f5f5;
+    --lsm-muted: #9b9b9b;
+}
+
+/* Store page background — scoped to store pages only (the templates add
+   the lsm-store-page body class); the rest of the site keeps its theme. */
+body.lsm-store-page { background: var(--lsm-bg); color: var(--lsm-text); }
+[data-bs-theme="dark"] body.post-type-archive-product,
+[data-bs-theme="dark"] body.single-product,
+[data-bs-theme="dark"] body.tax-product_category,
+[data-bs-theme="dark"] body.tax-product_tag,
+[data-bs-theme="dark"] body.search { background: var(--lsm-bg); color: var(--lsm-text); }
+
+/* ---------- 2. Gradient text — the ONLY place pink/yellow appear ---------- */
+.special-deal {
+    background: var(--lsm-grad);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    font-weight: 900; letter-spacing: .04em; font-size: 15px; display: inline-block;
+}
+
+/* ---------- 3. Theme toggle button (added by the templates) ---------- */
+#lsm-theme-toggle {
+    position: fixed; right: 18px; bottom: 18px; z-index: 99999;
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--lsm-purple); color: #fff; border: none; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(99, 91, 255, .4); font-size: 18px; line-height: 1;
+    transition: background .25s, transform .2s;
+}
+#lsm-theme-toggle:hover { background: var(--lsm-purple-600); transform: translateY(-2px); }
+
+/* ---------- 4. Breadcrumbs ---------- */
+.stripe-shop-lite-breadcrumbs .breadcrumb-item a { color: var(--lsm-muted); }
+.stripe-shop-lite-breadcrumbs .breadcrumb-item a:hover { color: var(--lsm-purple); }
+.stripe-shop-lite-breadcrumbs .breadcrumb-item.active { color: var(--lsm-purple); }
+
+/* ---------- 5. Filters row 1 ([store_filters]) ---------- */
+.stripe-shop-lite-filters {
+    background: var(--lsm-surface);
+    border: 1px solid var(--lsm-line);
+    border-radius: var(--lsm-radius);
+}
+.stripe-shop-lite-filter { color: var(--lsm-muted); font-weight: 700; letter-spacing: .04em; }
+.stripe-shop-lite-filter input,
+.stripe-shop-lite-filter select {
+    background: var(--lsm-surface); color: var(--lsm-text);
+    border: 1px solid var(--lsm-line); border-radius: 10px; outline: none;
+}
+.stripe-shop-lite-filter input:focus,
+.stripe-shop-lite-filter select:focus { border-color: var(--lsm-purple); box-shadow: 0 0 0 .2rem var(--lsm-purple-soft); }
+.stripe-shop-lite-filter-apply {
+    background: var(--lsm-purple) !important; color: #fff;
+    border: none; border-radius: 10px !important; padding: 10px 26px !important;
+    font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    transition: background .25s;
+}
+.stripe-shop-lite-filter-apply:hover,
+.stripe-shop-lite-filter-apply:focus { background: var(--lsm-purple-600) !important; color: #fff !important; }
+
+/* ---------- 6. Filter row 2 (added markup: size chips + color swatches) ---------- */
+.lsm-filter-row2 {
+    display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    margin-top: 14px; padding: 14px 0; border-top: 1px dashed var(--lsm-line);
+}
+.lsm-flabel { font-size: 10px; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; color: var(--lsm-muted); }
+.lsm-chip {
+    padding: 7px 14px; border-radius: 999px; border: 1px solid var(--lsm-line);
+    background: var(--lsm-surface-2); font-size: 12px; font-weight: 800;
+    color: var(--lsm-muted); cursor: pointer; transition: .2s;
+}
+.lsm-chip:hover { border-color: var(--lsm-purple); color: var(--lsm-text); }
+.lsm-chip.sel { background: var(--lsm-purple); border-color: var(--lsm-purple); color: #fff; }
+.lsm-swatches { display: flex; gap: 8px; align-items: center; }
+.lsm-sw {
+    width: 24px; height: 24px; border-radius: 50%; cursor: pointer; display: inline-block;
+    outline: 2px solid transparent; outline-offset: 2px;
+}
+.lsm-sw.sel { outline-color: var(--lsm-purple); }
+.lsm-members {
+    margin-left: auto; display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 700; color: var(--lsm-text); white-space: nowrap;
+}
+
+/* summary bar under the filters (added markup) */
+.lsm-summary {
+    max-width: 100%; margin: 0 auto 18px; padding: 0;
+    display: flex; align-items: center; gap: 18px; flex-wrap: wrap;
+    font-size: 14px; color: var(--lsm-muted);
+}
+.lsm-summary b { color: var(--lsm-text); }
+
+/* ---------- 7. Product cards (archive grid) ---------- */
+.stripe-shop-lite-product-card {
+    background: var(--lsm-surface);
+    border: 1px solid var(--lsm-line);
+    border-radius: var(--lsm-radius);
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+}
+.stripe-shop-lite-product-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--lsm-purple);
+    box-shadow: 0 10px 30px var(--lsm-purple-soft);
+}
+.stripe-shop-lite-card-media,
+.stripe-shop-lite-card-noimg { background: var(--lsm-surface-2); }
+.stripe-shop-lite-card-title a { color: var(--lsm-text); }
+.stripe-shop-lite-card-title a:hover { color: var(--lsm-purple); }
+.stripe-shop-lite-card-price,
+.stripe-shop-lite-product-card .card-body h3 { color: var(--lsm-text); }
+.stripe-shop-lite-recurring,
+.stripe-shop-lite-unavailable,
+.stripe-shop-lite-no-products,
+.stripe-shop-lite-cart-page-empty { color: var(--lsm-muted); }
+.stripe-shop-lite-product-card .btn,
+.stripe-shop-lite-card-actions .btn {
+    background: var(--lsm-purple); color: #fff; border: none;
+    border-radius: 999px; padding: 10px 22px; font-weight: 800;
+    font-size: 13px; letter-spacing: .06em; text-transform: uppercase; transition: background .25s;
+}
+.stripe-shop-lite-product-card .btn:hover,
+.stripe-shop-lite-card-actions .btn:hover { background: var(--lsm-purple-600); color: #fff; }
+
+/* ---------- 8. Pagination ---------- */
+.stripe-shop-lite-pagination { gap: 8px; }
+.stripe-shop-lite-pagination .page-numbers {
+    background: var(--lsm-surface); border: 1px solid var(--lsm-line);
+    border-radius: 10px; color: var(--lsm-muted); font-weight: 800; transition: .2s;
+}
+.stripe-shop-lite-pagination .page-numbers:hover:not(.current) { border-color: var(--lsm-purple); color: var(--lsm-text); }
+.stripe-shop-lite-pagination .page-numbers.current {
+    background: var(--lsm-purple); border-color: var(--lsm-purple); color: #fff;
+}
+
+/* ---------- 9. Single product page ---------- */
+.stripe-shop-lite-product-title,
+.stripe-shop-lite-product-price { color: var(--lsm-text); }
+.stripe-shop-lite-product-price { font-weight: 900; }
+.stripe-shop-lite-single-desc,
+.stripe-shop-lite-single-meta,
+.stripe-shop-lite-stock { color: var(--lsm-muted); }
+.stripe-shop-lite-single-meta a { color: var(--lsm-purple); }
+
+/* kind badges: soft purple pills (overrides the plugin's !important rule) */
+.stripe-shop-lite-purple-badge {
+    background: var(--lsm-purple-soft) !important; color: var(--lsm-purple) !important;
+    border: 1px solid var(--lsm-purple-line) !important; border-radius: 999px !important;
+    font-weight: 800 !important; letter-spacing: .06em; text-transform: uppercase; font-size: .68rem;
+}
+
+/* gallery */
+.stripe-shop-lite-single-main-img { background: var(--lsm-surface-2); }
+.stripe-shop-lite-single-gallery .carousel-thumbnails button {
+    background: var(--lsm-surface-2); border: 2px solid var(--lsm-line);
+}
+.stripe-shop-lite-single-gallery .carousel-thumbnails button.active { border-color: var(--lsm-purple); }
+.stripe-shop-lite-single-gallery .zoom-container { border-radius: 12px; }
+
+/* qty stepper */
+.stripe-shop-lite-detail-qty {
+    background: var(--lsm-surface-2) !important;
+    border: 1px solid var(--lsm-line) !important;
+    border-radius: 10px !important;
+}
+.stripe-shop-lite-detail-qty-btn { color: var(--lsm-text); }
+.stripe-shop-lite-detail-qty-btn:hover { background: var(--lsm-purple-soft); color: var(--lsm-purple); }
+.stripe-shop-lite-detail-qty .stripe-shop-lite-product-qty { color: var(--lsm-text); }
+
+/* add-to-cart / waitlist / checkout buttons: purple pills */
+.stripe-shop-lite-product-actions .stripe-shop-lite-add {
+    background: var(--lsm-purple) !important; border-color: var(--lsm-purple) !important; color: #fff !important;
+    border-radius: 999px !important; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+}
+.stripe-shop-lite-product-actions .stripe-shop-lite-add:hover {
+    background: var(--lsm-purple-600) !important; border-color: var(--lsm-purple-600) !important; color: #fff !important;
+}
+button.stripe-shop-lite-add,
+button.stripe-shop-lite-waitlist-join,
+.stripe-shop-lite-cart-page-checkout {
+    background: var(--lsm-purple) !important; border-color: var(--lsm-purple) !important; color: #fff !important;
+    border-radius: 999px !important; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    transition: background .25s;
+}
+button.stripe-shop-lite-add:hover,
+button.stripe-shop-lite-waitlist-join:hover,
+.stripe-shop-lite-cart-page-checkout:hover {
+    background: var(--lsm-purple-600) !important; border-color: var(--lsm-purple-600) !important; color: #fff !important;
+}
+.stripe-shop-lite-waitlist-email {
+    background: var(--lsm-surface); color: var(--lsm-text);
+    border: 1px solid var(--lsm-line); border-radius: 10px; outline: none;
+}
+.stripe-shop-lite-waitlist-email:focus { border-color: var(--lsm-purple); }
+
+/* ---------- 10. ADDED blocks: rating / attributes / trust ---------- */
+.lsm-rating { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
+.lsm-rating .stars {
+    background: var(--lsm-grad); -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    font-size: 18px; letter-spacing: 2px;
+}
+.lsm-rating b { color: var(--lsm-text); }
+.lsm-rating a { color: var(--lsm-purple); font-size: 13px; text-decoration: underline; }
+
+.lsm-attr { margin-bottom: 16px; }
+.lsm-attr label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 12px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--lsm-text); margin-bottom: 9px;
+}
+.lsm-attr label span { color: var(--lsm-purple); font-weight: 700; text-transform: none; letter-spacing: 0; }
+.lsm-attr .sw {
+    width: 32px; height: 32px; border-radius: 50%; cursor: pointer; display: inline-block;
+    outline: 2px solid transparent; outline-offset: 2px;
+}
+.lsm-attr .sw.sel { outline-color: var(--lsm-purple); }
+.lsm-attr .sizes { display: flex; gap: 9px; flex-wrap: wrap; }
+.lsm-attr .sz {
+    min-width: 44px; text-align: center; padding: 10px 12px; cursor: pointer;
+    border: 1px solid var(--lsm-line); border-radius: 999px;
+    font-size: 13px; font-weight: 800; color: var(--lsm-muted);
+    background: var(--lsm-surface-2); transition: .2s;
+}
+.lsm-attr .sz:hover { border-color: var(--lsm-purple); color: var(--lsm-text); }
+.lsm-attr .sz.sel { background: var(--lsm-purple); border-color: var(--lsm-purple); color: #fff; }
+
+.lsm-trust {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    padding-top: 20px; margin-top: 22px; border-top: 1px solid var(--lsm-line);
+}
+.lsm-trust div { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.lsm-trust svg { color: var(--lsm-purple); flex: none; }
+.lsm-trust b { display: block; font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: var(--lsm-text); }
+.lsm-trust small { color: var(--lsm-muted); }
+
+/* ---------- 11. Tabs + info table ---------- */
+body.single-product .nav-tabs .nav-link,
+.stripe-shop-lite-no-bs .nav-tabs .nav-link { color: var(--lsm-muted); font-weight: 700; }
+body.single-product .nav-tabs .nav-link.active,
+body.single-product .nav-item.show .nav-link,
+.stripe-shop-lite-no-bs .nav-tabs .nav-link.active {
+    color: var(--lsm-purple); border-bottom-color: var(--lsm-purple);
+}
+.stripe-shop-lite-single-tabs .tab-content { color: var(--lsm-muted); }
+.stripe-shop-lite-info-table { --bs-table-bg: transparent; color: var(--lsm-muted); }
+.stripe-shop-lite-info-table th { color: var(--lsm-text); }
+.stripe-shop-lite-info-table td a { color: var(--lsm-purple); }
+.stripe-shop-lite-info-table th, .stripe-shop-lite-info-table td { border-color: var(--lsm-line); }
+
+/* ---------- 12. Cart page ---------- */
+.stripe-shop-lite-cart-page h1, .stripe-shop-lite-cart-page .h2 { color: var(--lsm-text); font-weight: 900; }
+.stripe-shop-lite-cart-table { --bs-table-bg: transparent; color: var(--lsm-text); }
+.stripe-shop-lite-cart-table th { color: var(--lsm-text); border-bottom: 2px solid var(--lsm-line); }
+.stripe-shop-lite-cart-table td { color: var(--lsm-text); border-bottom: 1px solid var(--lsm-line); }
+.stripe-shop-lite-cart-thumb, .stripe-shop-lite-cart-noimg { background: var(--lsm-surface-2); }
+.stripe-shop-lite-cart-title { color: var(--lsm-text); }
+.stripe-shop-lite-cart-per { color: var(--lsm-muted); }
+.stripe-shop-lite-qty-group .btn {
+    background: var(--lsm-surface-2) !important; border: 1px solid var(--lsm-line) !important; color: var(--lsm-text) !important;
+}
+.stripe-shop-lite-qty-group .btn:hover { color: var(--lsm-purple) !important; }
+.stripe-shop-lite-qty-group .form-control,
+.stripe-shop-lite-qty-value {
+    background: var(--lsm-surface-2) !important; border: 1px solid var(--lsm-line) !important; color: var(--lsm-text) !important;
+}
+.stripe-shop-lite-cart-remove .btn {
+    background: none; border: none; color: #ff5c5c; text-decoration: underline;
+}
+.stripe-shop-lite-cart-subtotal-row td { font-weight: 900; }
+
+/* cross-sell */
+.stripe-shop-lite-crosssell a { border-color: var(--lsm-line); color: var(--lsm-text); }
+.stripe-shop-lite-crosssell a:hover { border-color: var(--lsm-purple); }
+.stripe-shop-lite-crosssell em { color: var(--lsm-muted); }
+.stripe-shop-lite-crosssell img, .stripe-shop-lite-crosssell-noimg { background: var(--lsm-surface-2); }
+
+/* ---------- 13. Cart drawer (BS5 offcanvas) ---------- */
+[data-bs-theme] .stripe-shop-lite-drawer { background: var(--lsm-surface); color: var(--lsm-text); }
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-badge { background: var(--lsm-purple); }
+.stripe-shop-lite-drawer .stripe-shop-lite-line { border-bottom: 1px solid var(--lsm-line); }
+.stripe-shop-lite-drawer .stripe-shop-lite-line-thumb { background: var(--lsm-surface-2); }
+.stripe-shop-lite-drawer .stripe-shop-lite-line-title { color: var(--lsm-text); }
+.stripe-shop-lite-drawer .stripe-shop-lite-line-qty,
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-cartpage { color: var(--lsm-muted); }
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-head,
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-total,
+.stripe-shop-lite-drawer .stripe-shop-lite-drawer-foot { border-color: var(--lsm-line); }
+.stripe-shop-lite-drawer .stripe-shop-lite-checkout-btn {
+    background: var(--lsm-purple); color: #fff; border: none; border-radius: 999px;
+    font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+}
+
+/* ---------- 14. Notices / restricted / loader ---------- */
+.stripe-shop-lite-notice-ok { background: var(--lsm-purple-soft); color: var(--lsm-purple); }
+.stripe-shop-lite-notice-err { background: rgba(255, 50, 88, .1); color: #ff5c7c; }
+.stripe-shop-lite-restricted { background: var(--lsm-surface-2); border-left: 4px solid var(--lsm-purple); color: var(--lsm-text); }
+.stripe-shop-lite-loader { color: var(--lsm-muted); }
+.stripe-shop-lite-loader::before { border-color: var(--lsm-line); border-top-color: var(--lsm-purple); }
+
+/* ---------- 15. Account dashboard ---------- */
+.stripe-shop-lite-db-card { background: var(--lsm-surface); border-color: var(--lsm-line); color: var(--lsm-text); }
+.stripe-shop-lite-db-h2 { border-bottom-color: var(--lsm-line); }
+.stripe-shop-lite-db-card h6,
+.stripe-shop-lite-db-small,
+.stripe-shop-lite-db-note,
+.stripe-shop-lite-db-topuser { color: var(--lsm-muted); }
+.stripe-shop-lite-db-nav a { color: var(--lsm-text); }
+.stripe-shop-lite-db-nav a:hover { background: var(--lsm-surface-2); color: var(--lsm-purple); }
+.stripe-shop-lite-db table.stripe-shop-lite-orders th,
+.stripe-shop-lite-db table.stripe-shop-lite-orders td { border-bottom-color: var(--lsm-line); color: var(--lsm-text); }
+.stripe-shop-lite-db-copy { background: var(--lsm-surface-2); border-color: var(--lsm-line); color: var(--lsm-text); }
+.stripe-shop-lite-no-bs .offcanvas { background: var(--lsm-surface); color: var(--lsm-text); }
+.stripe-shop-lite-no-bs .badge { background: var(--lsm-purple-soft); color: var(--lsm-purple); }
+.stripe-shop-lite-no-bs .btn-outline-secondary { color: var(--lsm-text); border-color: var(--lsm-line); }
+.stripe-shop-lite-no-bs .btn-outline-secondary:hover { background: var(--lsm-surface-2); }
+
+/* ---------- 16. pgrid card demos (labels, stars, dark surfaces) ---------- */
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-pcontent { background: var(--lsm-surface); }
+.stripe-shop-lite-pgrid3:before { background: var(--lsm-surface); border-color: var(--lsm-line); }
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-pcontent,
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-pcontent,
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-pcontent,
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-pcontent,
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pcontent,
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-pcontent { color: var(--lsm-text); }
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pimg8 { border-color: var(--lsm-line); }
+
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-ptitle a,
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-ptitle a,
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-ptitle a,
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-ptitle a,
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-ptitle a,
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-ptitle a,
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-ptitle a,
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-ptitle a,
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-ptitle a { color: var(--lsm-muted); }
+.stripe-shop-lite-pgrid1:hover .stripe-shop-lite-ptitle a,
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-ptitle a:hover,
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-ptitle a:hover,
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-ptitle a:hover,
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-ptitle a:hover,
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-ptitle a:hover,
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-ptitle a:hover,
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-ptitle a:hover,
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-ptitle a:hover { color: var(--lsm-purple); }
+
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-pprice,
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-pprice,
+.stripe-shop-lite-pgrid5 .stripe-shop-lite-pprice,
+.stripe-shop-lite-pgrid6 .stripe-shop-lite-pprice span,
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-pprice,
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-pprice,
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-pprice { color: var(--lsm-text); }
+
+/* rating stars on the demo cards: brand gradient instead of yellow */
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-prating,
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-prating li,
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-prating li {
+    background: var(--lsm-grad); -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+}
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-prating li.disable,
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-prating li.disable,
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-prating li.disable {
+    -webkit-text-fill-color: var(--lsm-line); color: var(--lsm-line);
+}
+
+/* sale labels: discount = gradient, new = purple */
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-discount-label,
+.stripe-shop-lite-pgrid3 .stripe-shop-lite-discount-label,
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-discount-label,
+.stripe-shop-lite-pgrid8 .stripe-shop-lite-discount-label {
+    background: var(--lsm-grad) !important; color: #0a0a0a !important;
+}
+.stripe-shop-lite-pgrid7 .stripe-shop-lite-new-label { background: var(--lsm-purple); }
+.stripe-shop-lite-pgrid1 .stripe-shop-lite-cart-btn { color: var(--lsm-purple); }
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-cart-btn { background: var(--lsm-purple); }
+.stripe-shop-lite-pgrid2 .stripe-shop-lite-cart-btn:hover { background: var(--lsm-purple-600); }
+.stripe-shop-lite-pgrid4 .stripe-shop-lite-cart-btn { border-color: var(--lsm-line); color: var(--lsm-muted); }
+.stripe-shop-lite-pgrid4:hover .stripe-shop-lite-cart-btn { background: var(--lsm-purple); border-color: transparent; color: #fff; }
+.stripe-shop-lite-pgrid9 .stripe-shop-lite-cart-btn { color: var(--lsm-purple); }
+
+/* ---------- 17. Search / taxonomy summary ---------- */
+.stripe-shop-lite-tax-summary h1,
+.stripe-shop-lite-search-summary h2 { color: var(--lsm-text); font-weight: 900; }
+.stripe-shop-lite-tax-summary .text-muted,
+.stripe-shop-lite-search-summary .text-muted { color: var(--lsm-muted) !important; }
+
+/* ---------- 18. Placeholder image (assets/placeholder.svg) ---------- */
+/* The placeholder ships with padding + "coming soon" art; contain-fit it
+   everywhere instead of cropping, so it always sits nicely in its box. */
+.stripe-shop-lite-card-media img[src*="placeholder"] { object-fit: contain; }
+.stripe-shop-lite-card-noimg,
+.stripe-shop-lite-cart-noimg,
+.stripe-shop-lite-crosssell-noimg { object-fit: contain; }
+.stripe-shop-lite-single-main-img.stripe-shop-lite-card-noimg { object-fit: contain; }
+
+/* ---------- 19. Responsive ---------- */
+@media (max-width: 900px) {
+    .lsm-members { margin-left: 0; }
+}
+/* ==================================================================
+   20. THEME-MATCHING & POLISH FIXES (consolidated)
+   These rules were previously printed inline by the plugin on store
+   pages; they are consolidated here so assets/store.css is complete
+   on its own. The plugin's inline copy is identical and may be removed
+   in a later cleanup pass.
+   ================================================================== */
+
+/* 1. Simple Likes button on store cards (matches the theme button look) */
+.sl-wrapper { color: #ddd !important; border: 1px solid #ddd; background: transparent; border-radius: 5px; padding: 8px 10px 9px 10px; text-align: center; float: none; font-size: 14px; white-space: nowrap; }
+.sb-wrapper { color: #ddd !important; border: 1px solid #ddd; background: transparent; border-radius: 3px; padding: 8px 18px 9px 10px; text-align: center; float: none; font-size: 14px; white-space: nowrap; }
+html[data-bs-theme="dark"] .sl-wrapper { color: #aaa !important; border-color: #555; }
+html[data-bs-theme="dark"] .sb-wrapper { color: #aaa !important; border-color: #555; }
+
+/* 2. Product card hover: faint translucency, never a solid white wash.
+   When the product has a gallery the second image (pic-2) swaps in. */
+.stripe-shop-lite-pimg1, .stripe-shop-lite-pimg2 { position: relative; }
+.stripe-shop-lite-pimg1::after, .stripe-shop-lite-pimg2::after { content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, 0); pointer-events: none; transition: background .2s ease; }
+.stripe-shop-lite-pgrid:hover .stripe-shop-lite-pimg1::after, .stripe-shop-lite-pgrid:hover .stripe-shop-lite-pimg2::after { background: rgba(255, 255, 255, .12); }
+.stripe-shop-lite-pgrid:hover .stripe-shop-lite-pimg1, .stripe-shop-lite-pgrid:hover .stripe-shop-lite-pimg2,
+.stripe-shop-lite-pgrid:hover .stripe-shop-lite-pic-1, .stripe-shop-lite-pgrid:hover .stripe-shop-lite-pic-2 { background: transparent !important; }
+
+/* 3. Store typography matches the theme */
+body.lsm-store-page h1 { font-family: 'League Spartan', 'Poppins', sans-serif; text-transform: lowercase; color: #000; }
+body.lsm-store-page h1:not([class*="h2"]):not([class*="h3"]):not([class*="h4"]):not([class*="h5"]):not([class*="h6"]) { font-size: 6rem; line-height: 1; }
+body.lsm-store-page p { font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif; }
+body.lsm-store-page h2.stripe-shop-lite-ptitle, body.lsm-store-page h3.stripe-shop-lite-ptitle, body.lsm-store-page h4.stripe-shop-lite-ptitle { color: #000; text-decoration: none; }
+html[data-bs-theme="dark"] body.lsm-store-page h1,
+html[data-bs-theme="dark"] body.lsm-store-page h2.stripe-shop-lite-ptitle,
+html[data-bs-theme="dark"] body.lsm-store-page h3.stripe-shop-lite-ptitle,
+html[data-bs-theme="dark"] body.lsm-store-page h4.stripe-shop-lite-ptitle { color: #fff; }
+
+/* 3d. Button radii + link reset (theme button language) */
+button.stripe-shop-lite-add, button.stripe-shop-lite-waitlist-join, .stripe-shop-lite-cart-page-checkout { border-radius: 3px; }
+.stripe-shop-lite-no-bs .btn { border-radius: 3px; }
+.stripe-shop-lite-no-bs .btn-danger, .stripe-shop-lite-no-bs .stripe-shop-lite-cart-remove .btn { text-decoration: none; }
+.stripe-shop-lite-drawer .stripe-shop-lite-checkout-btn { border-radius: 3px; }
+
+/* 13. Cart line title: the theme forces its own weight with !important */
+.stripe-shop-lite-cart-title { font-weight: 600 !important; }
+
+/* 14. Store page background: slightly whiter in light mode */
+html[data-bs-theme="light"] body.lsm-store-page { background: #f8f9fa; }
+
+/* 4. Gallery thumbnails: highlight the clicked one. Bootstrap's script
+   only manages .carousel-indicators, so the .active class stays stuck
+   on the first hardcoded thumbnail - focus styling fixes it for all. */
+.stripe-shop-lite-single-gallery .carousel-thumbnails button:focus,
+.stripe-shop-lite-single-gallery .carousel-thumbnails button:focus-visible { border-color: var(--lsm-purple) !important; outline: none; }
+
+/* 5. Dark mode: comments on the product page */
+html[data-bs-theme="dark"] body.single-product.stripe-shop-lite-no-bs #comments .comment-list .card { border: none; background: none; }
+html[data-bs-theme="dark"] body.single-product.stripe-shop-lite-no-bs #comments .comments-title,
+html[data-bs-theme="dark"] body.single-product.stripe-shop-lite-no-bs #comments .comments-title span,
+html[data-bs-theme="dark"] body.single-product.stripe-shop-lite-no-bs #comments .card-header h5,
+html[data-bs-theme="dark"] body.single-product.stripe-shop-lite-no-bs #comments h3#reply-title.comment-reply-title { color: #fff; }
+.stripe-shop-lite-no-bs .btn-outline-secondary { color: var(--lsm-text) !important; border-color: var(--lsm-line) !important; }
+html[data-bs-theme="dark"] body.single-product.stripe-shop-lite-no-bs #comments .comment-content a,
+html[data-bs-theme="dark"] body.single-product.stripe-shop-lite-no-bs #comments p a { color: var(--lsm-purple); text-decoration: none; }
+html[data-bs-theme="dark"] body.single-product.stripe-shop-lite-no-bs #comments .comment-content a:hover,
+html[data-bs-theme="dark"] body.single-product.stripe-shop-lite-no-bs #comments p a:hover { text-decoration: underline; }
+
+/* 6. Comment form star picker (pure CSS, no JS) */
+.stripe-shop-lite-rating-field fieldset { border: 0; padding: 0; margin: 0 0 1em; }
+.stripe-shop-lite-rating-field > label { display: block; margin: 0 0 .4em; font-weight: 600; }
+.stripe-shop-lite-rating-field .rating-container { display: inline-flex; flex-direction: row-reverse; align-items: center; gap: 2px; }
+.stripe-shop-lite-rating-field input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+.stripe-shop-lite-rating-field label { cursor: pointer; font-size: 1rem; line-height: 1; color: #000; }
+html[data-bs-theme="dark"] .stripe-shop-lite-rating-field label { color: #fff; }
+.stripe-shop-lite-rating-field label .fa { color: #d9d9d9; transition: color .15s ease; font-style: normal; }
+.stripe-shop-lite-rating-field label:hover .fa,
+.stripe-shop-lite-rating-field label:hover ~ label .fa,
+.stripe-shop-lite-rating-field input[type="radio"]:checked ~ label .fa { color: #f5b301; }
+.stripe-shop-lite-rating-field input[type="radio"]:focus-visible + label { outline: 2px solid #635bff; outline-offset: 2px; border-radius: 3px; }
+.stripe-shop-lite-rating-clear { order: -1; font-size: 12px; color: #635bff; margin-inline-end: 8px; }
+.stripe-shop-lite-rating-clear:hover { color: #f5b301; }
+
+/* stars on comments + average summary */
+.stripe-shop-lite-crating { list-style: none; display: inline-flex; gap: 2px; margin: .6em 0 0; padding: 0; }
+.stripe-shop-lite-crating li { font-size: 14px; color: #f5b301; }
+.stripe-shop-lite-crating li.disable { color: #d9d9d9; }
+.stripe-shop-lite-rating-summary { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; }
+.stripe-shop-lite-srating { list-style: none; display: inline-flex; gap: 2px; margin: 0; padding: 0; }
+.stripe-shop-lite-srating li { font-size: 16px; color: #f5b301; }
+.stripe-shop-lite-srating li.disable { color: #d9d9d9; }
+.stripe-shop-lite-rating-text { font-size: 14px; }
+
+/* 7. Signup text next to the newsletter checkbox */
+p.mc4wp-checkbox.mc4wp-checkbox-wp-comment-form span { padding-left: 20px; font-size: .9rem; }
+
+/* 8. Akismet comment form privacy notice */
+p.akismet_comment_form_privacy_notice { font-size: .9rem; margin-top: 10px; }
+
+/* 9. Filter bar: desktop price widths, mobile full width */
+.stripe-shop-lite-filter input, .stripe-shop-lite-filter select { min-width: auto; }
+@media (min-width: 768px) { .stripe-shop-lite-price-range input { width: 200px; } }
+@media (max-width: 767.98px) { .stripe-shop-lite-price-range input { width: 100%; } }
+
+/* Functional catalog filter chips: active state */
+.lsm-chip-active, .lsm-sw-active { outline: 2px solid #635bff; outline-offset: 2px; }
+
+/* Archive spacing: the theme zeroes the #page padding on body.archive.tax-product_*
+   pages, so the archive container carries its own padding. */
+.stripe-shop-lite-archive { padding: 3rem; }
+@media (max-width: 767.98px) { .stripe-shop-lite-archive { padding: 1.5rem; } }
+
+/* Pinterest "Pin it" button: the theme injects it into archive images,
+   which broke the product card grid on category / taxonomy pages. */
+.pin-it-btn-wrapper { position: relative; display: block !important; }
+
+/* 11. "You might also like" dark mode */
+html[data-bs-theme="dark"] .stripe-shop-lite-crosssell-item { background: #1e1e1e; border-color: #333; }
+html[data-bs-theme="dark"] .stripe-shop-lite-crosssell-name { color: #fff; }
+html[data-bs-theme="dark"] .stripe-shop-lite-crosssell-item em { color: #aaa; }

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ruleset name="Storefront for Stripe">
+	<description>PHPCS configuration for local and CI runs. Plugin Check does not read this file.</description>
+	<file>.</file>
+	<exclude-pattern>/lib/*</exclude-pattern>
+	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/assets/vendor/*</exclude-pattern>
+	<arg name="extensions" value="php"/>
+	<config name="minimum_wp_version" value="6.0"/>
+	<rule ref="WordPress.Security"/>
+	<rule ref="WordPress.DB"/>
+	<rule ref="WordPress.WP.EnqueuedResources"/>
+	<rule ref="WordPress.WP.AlternativeFunctions"/>
+	<rule ref="WordPress.WP.DeprecatedFunctions"/>
+	<rule ref="WordPress.DateTime.RestrictedFunctions"/>
+	<rule ref="WordPress.PHP.DevelopmentFunctions"/>
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="storefront-for-stripe"/>
+			</property>
+		</properties>
+	</rule>
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="stripe_shop_lite"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>
